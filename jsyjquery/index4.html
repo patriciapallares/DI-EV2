@@ -1,66 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mostrar y Ocultar Imágenes</title>
-  <style>
-    #image-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mostrar y Ocultar Imágenes</title>
+    <style>
+      #image-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
 
-    .image {
-      width: 100px;
-      height: 100px;
-      margin: 10px;
-      opacity: 1;
-      transition: opacity 0.5s;
-      cursor: pointer;
-    }
+      .image {
+        width: 250px;
+        height: 140px;
+        margin: 10px;
+        opacity: 1;
+        transition: opacity 0.5s;
+        cursor: pointer;
+      }
 
-    .hidden {
-      opacity: 0.1;
-    }
-  </style>
-</head>
-<body>
-  <button onclick="mostrarImagenes()">Mostrar</button>
-  <button onclick="ocultarImagenes()">Ocultar</button>
+      .hidden {
+        opacity: 0.1;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="ocultarImagenes()">Ocultar</button>
+    <button onclick="mostrarImagenes()">Mostrar</button>
 
-  <div id="image-container">
-    <img class="image" src="imagen1.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen2.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen3.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen4.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen5.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen6.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen7.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen8.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen9.jpg" onclick="ocultarImagen(this)">
-    <img class="image" src="imagen10.jpg" onclick="ocultarImagen(this)">
-  </div>
+    <div id="image-container">
+      <img class="image" src="dua1.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua2.jpeg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua3.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua4.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua5.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua6.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua7.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua8.jpg" onclick="ocultarImagen(this)" />
+    </div>
 
-  <script>
-    const images = document.querySelectorAll('.image');
+    <script>
+      const images = document.querySelectorAll(".image");
 
-    function mostrarImagenes() {
-      images.forEach((image, index) => {
-        setTimeout(() => {
-          image.style.opacity = '1';
-        }, (index + 1) * 1000);
-      });
-    }
+      function mostrarImagenes() {
+        images.forEach((image, index) => {
+          setTimeout(() => {
+            image.style.opacity = "1";
+          }, (index + 1) * 1000);
+        });
+      }
 
-    function ocultarImagenes() {
-      images.forEach(image => {
-        image.style.opacity = '0.1';
-      });
-    }
+      function ocultarImagenes() {
+        images.forEach((image) => {
+          image.style.opacity = "0.1";
+        });
+      }
 
-    function ocultarImagen(selectedImage) {
-      selectedImage.style.opacity = '0.1';
-    }
-  </script>
-</body>
+      function ocultarImagen(selectedImage) {
+        selectedImage.style.opacity = "0.1";
+      }
+    </script>
+  </body>
 </html>
