@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mostrar y Ocultar JS</title>
+    <style>
+      .image-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .image {
+        width: 426px;
+        height: 240px;
+        margin: 5px;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .hidden {
+        opacity: 0.1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mostrar y ocultar</h1>
+    <button id="mostrarBoton" onclick="mostrarImagenes()">Mostrar</button>
+    <button id="ocultarBoton" onclick="ocultarImagenes()">Ocultar</button>
+
+    <div class="image-container">
+      <img class="image" src="dua1.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua2.jpeg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua3.jpg" onclick="ocultarImagen(this)" />
+      <img class="image" src="dua4.jpg" onclick="ocultarImagen(this)" />
+    </div>
+
+    <script>
+      function mostrarImagenes() {
+        var imagenes = document.querySelectorAll(".image");
+        imagenes.forEach(function (imagen, index) {
+          setTimeout(function () {
+            imagen.style.opacity = 1;
+          }, 1000 * index);
+        });
+      }
+
+      function ocultarImagenes() {
+        var imagenes = document.querySelectorAll(".image");
+        imagenes.forEach(function (imagen) {
+          imagen.style.opacity = 0.1;
+        });
+      }
+
+      function ocultarImagen(imagen) {
+        imagen.style.opacity = 0.1;
+      }
+    </script>
+  </body>
+</html>

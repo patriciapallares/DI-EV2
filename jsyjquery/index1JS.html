@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista JS</title>
+  </head>
+  <body>
+    <h1>Lista con cuatro items</h1>
+    <ul id="lista">
+      <li>Elemento 1</li>
+      <li>Elemento 2</li>
+      <li>Elemento 3</li>
+      <li>Elemento 4</li>
+    </ul>
+
+    <button id="eliminarListaBoton">Eliminar la lista completa</button>
+    <button id="restaurarListaBoton">Restaurar lista</button>
+    <button id="addElementoFinalBoton">Añadir un elemento al final</button>
+    <button id="addElementoInicioBoton">Añadir un elemento al inicio</button>
+    <button id="eliminarUltimoBoton">Eliminar el último elemento</button>
+    <button id="eliminarPrimeroBoton">Eliminar el primer elemento</button>
+    <button id="eliminarPrimeroSegundoBoton">
+      Eliminar el primero y segundo
+    </button>
+    <button id="eliminarUltimosDosBoton">
+      Eliminar los dos últimos elementos
+    </button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Referencias a la lista y a los botones
+        var lista = document.getElementById("lista");
+        var eliminarListaBoton = document.getElementById("eliminarListaBoton");
+        var restaurarListaBoton = document.getElementById(
+          "restaurarListaBoton"
+        );
+        var addElementoFinalBoton = document.getElementById(
+          "addElementoFinalBoton"
+        );
+        var addElementoInicioBoton = document.getElementById(
+          "addElementoInicioBoton"
+        );
+        var eliminarUltimoBoton = document.getElementById(
+          "eliminarUltimoBoton"
+        );
+        var eliminarPrimeroBoton = document.getElementById(
+          "eliminarPrimeroBoton"
+        );
+        var eliminarPrimeroSegundoBoton = document.getElementById(
+          "eliminarPrimeroSegundoBoton"
+        );
+        var eliminarUltimosDosBoton = document.getElementById(
+          "eliminarUltimosDosBoton"
+        );
+
+        //  Eliminar la lista completa.
+        eliminarListaBoton.addEventListener("click", function () {
+          lista.innerHTML = "";
+        });
+
+        //  Restaurar lista.
+        restaurarListaBoton.addEventListener("click", function () {
+          lista.innerHTML = `
+          <li>Elemento 1</li>
+          <li>Elemento 2</li>
+          <li>Elemento 3</li>
+          <li>Elemento 4</li>
+        `;
+        });
+
+        //  Añadir un elemento al final de la lista.
+        addElementoFinalBoton.addEventListener("click", function () {
+          var nuevoElemento = document.createElement("li");
+          nuevoElemento.textContent = "Nuevo elemento";
+          lista.appendChild(nuevoElemento);
+        });
+
+        //  Añadir un elemento al principio de la lista.
+        addElementoInicioBoton.addEventListener("click", function () {
+          var nuevoElemento = document.createElement("li");
+          nuevoElemento.textContent = "Nuevo elemento";
+          lista.insertBefore(nuevoElemento, lista.firstChild);
+        });
+
+        // Eliminar el último elemento.
+        eliminarUltimoBoton.addEventListener("click", function () {
+          var elementos = lista.getElementsByTagName("li");
+          if (elementos.length > 0) {
+            lista.removeChild(elementos[elementos.length - 1]);
+          }
+        });
+
+        //  Eliminar el primer elemento.
+        eliminarPrimeroBoton.addEventListener("click", function () {
+          var elementos = lista.getElementsByTagName("li");
+          if (elementos.length > 0) {
+            lista.removeChild(elementos[0]);
+          }
+        });
+
+        //  Eliminar el primero y segundo elemento.
+        eliminarPrimeroSegundoBoton.addEventListener("click", function () {
+          var elementos = lista.getElementsByTagName("li");
+          if (elementos.length >= 2) {
+            lista.removeChild(elementos[0]);
+            lista.removeChild(elementos[0]);
+          }
+        });
+
+        //  Eliminar los dos últimos.
+        eliminarUltimosDosBoton.addEventListener("click", function () {
+          var elementos = lista.getElementsByTagName("li");
+          if (elementos.length >= 2) {
+            lista.removeChild(elementos[elementos.length - 1]);
+            lista.removeChild(elementos[elementos.length - 1]);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

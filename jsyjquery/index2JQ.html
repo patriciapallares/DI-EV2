@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería Fotográfica con jQuery</title>
+    <style>
+      .galeria {
+        display: flex;
+      }
+
+      .image {
+        margin: 5px;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .image.selected {
+        opacity: 1;
+        border: 2px solid red; /* Efecto de énfasis */
+      }
+
+      .image:not(.selected) {
+        opacity: 0.4;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".image").on("click", function () {
+          $(".image").removeClass("selected");
+          $(this).addClass("selected");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Galería</h1>
+    <div class="galeria">
+      <img class="image" src="dua1.jpg" />
+      <img class="image" src="dua2.jpeg" />
+      <img class="image" src="dua3.jpg" />
+      <img class="image" src="dua4.jpg" />
+    </div>
+  </body>
+</html>

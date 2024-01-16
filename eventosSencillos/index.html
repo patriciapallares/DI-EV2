@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="ca">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
-
+  <body>
     <!-- En una página web vas a colocar un elemento tipo div con un argumento onclick() para que al pulsar sobre el bloque
     se abra una ventana alert con el mensaje "Pulsaste sobre el div". El bloque div deberá tener como texto "Pulsa
     aquí". -->
@@ -18,21 +15,61 @@
     bloque se abra una ventana alert con el mensaje "Pulsaste sobre el botón". El bloque div deberá tener como texto
     "Pulsa aquí". -->
 
-    <div id="div1"
-        style="background-color: lightcoral; width: 100px; height: 100px;  display: flex; align-items: center; justify-content: center;"
-        onclick="showAlert('DIV')">Pulsa aquí</div>
+    <div
+      id="div1"
+      style="
+        background-color: lightcoral;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+      onclick="showAlert('DIV')"
+    >
+      Pulsa aquí
+    </div>
 
     <button type="button" onclick="showAlert('BOTÓN')">Pulsa aquí</button>
 
-    <div style="display: flex; flex-direction: row;">
-        <div id="c1" style="background: lightcoral; width: 100px; height: 100px; color: lightcoral;">rojo</div>
+    <div style="display: flex; flex-direction: row">
+      <div
+        id="c1"
+        style="
+          background: lightcoral;
+          width: 100px;
+          height: 100px;
+          color: lightcoral;
+        "
+      >
+        rojo
+      </div>
 
-        <div id="c2" style="background: lightgray; width: 100px; height: 100px; color: lightgray;" >blanco</div>
+      <div
+        id="c2"
+        style="
+          background: lightgray;
+          width: 100px;
+          height: 100px;
+          color: lightgray;
+        "
+      >
+        blanco
+      </div>
 
-        <div id="c3" style="background: lightblue; width: 100px; height: 100px; color: lightblue;">azul</div>
+      <div
+        id="c3"
+        style="
+          background: lightgreen;
+          width: 100px;
+          height: 100px;
+          color: lightgreen;
+        "
+      >
+        azul
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

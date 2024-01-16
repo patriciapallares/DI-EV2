@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista JQ</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <h1>Lista con cuatro items</h1>
+    <ul id="lista">
+      <li>Elemento 1</li>
+      <li>Elemento 2</li>
+      <li>Elemento 3</li>
+      <li>Elemento 4</li>
+    </ul>
+
+    <button id="eliminarListaBoton">Eliminar la lista completa</button>
+    <button id="restaurarListaBoton">Restaurar lista</button>
+    <button id="addElementoFinalBoton">Añadir un elemento al final</button>
+    <button id="addElementoInicioBoton">Añadir un elemento al inicio</button>
+    <button id="eliminarUltimoBoton">Eliminar el último elemento</button>
+    <button id="eliminarPrimeroBoton">Eliminar el primer elemento</button>
+    <button id="eliminarPrimeroSegundoBoton">
+      Eliminar el primero y segundo
+    </button>
+    <button id="eliminarUltimosDosBoton">
+      Eliminar los dos últimos elementos
+    </button>
+
+    <script>
+      $(document).ready(function () {
+        // Eliminar la lista completa.
+        $("#eliminarListaBoton").click(function () {
+          $("#lista").empty();
+        });
+
+        // Restaurar lista.
+        $("#restaurarListaBoton").click(function () {
+          $("#lista").html(`
+          <li>Elemento 1</li>
+          <li>Elemento 2</li>
+          <li>Elemento 3</li>
+          <li>Elemento 4</li>
+        `);
+        });
+
+        // Añadir un elemento al final de la lista.
+        $("#addElementoFinalBoton").click(function () {
+          const nuevoElemento = $("<li>").text("Nuevo elemento");
+          $("#lista").append(nuevoElemento);
+        });
+
+        // Añadir un elemento al principio de la lista.
+        $("#addElementoInicioBoton").click(function () {
+          const nuevoElemento = $("<li>").text("Nuevo elemento");
+          $("#lista").prepend(nuevoElemento);
+        });
+
+        // Eliminar el último elemento.
+        $("#eliminarUltimoBoton").click(function () {
+          $("#lista li:last-child").remove();
+        });
+
+        // Eliminar el primer elemento.
+        $("#eliminarPrimeroBoton").click(function () {
+          $("#lista li:first-child").remove();
+        });
+
+        // Eliminar el primero y segundo elemento.
+        $("#eliminarPrimeroSegundoBoton").click(function () {
+          $("#lista li:first-child, #lista li:nth-child(2)").remove();
+        });
+
+        // Eliminar los dos últimos.
+        $("#eliminarUltimosDosBoton").click(function () {
+          $("#lista li:last-child, #lista li:nth-last-child(2)").remove();
+        });
+      });
+    </script>
+  </body>
+</html>
