@@ -8,6 +8,7 @@ var contador = 40; //Contador de movimientos
 var tiempo = new Date(15000); //Para tener solo 15 segundos en milisegundos
 var stop; //Para parar el tmporizador
 
+console.log("hola");
 //Inicio el juego
 function canvasStars() {
   //Obtengo el elemento canvas
@@ -28,11 +29,15 @@ function canvasStars() {
   //Llamo a la función que pinta los asteroides
   pintarAsteroides();
 
+  pintarAgua();
+  pintarReloj();
+
   //Añado el escuchador del teclado
   window.addEventListener("keydown", moverNave, true);
 
   //LLamada al temporizador
   temporizador();
+  getLocation();
 }
 
 //Pinto el fondo con las estrellas
@@ -94,7 +99,7 @@ function pintarAsteroides() {
     }
 
     //Pinto un asteroide
-    ctx.fillStyle = "red";
+    // ctx.fillStyle = "red";
     ctx.beginPath();
     // ctx.rect(x, y, 20, 20);
 
@@ -106,6 +111,66 @@ function pintarAsteroides() {
     ctx.closePath();
     ctx.fill();
   }
+}
+
+//Pintar agua
+var aguaImage = new Image();
+aguaImage.src = "agua.png";
+
+function pintarAgua() {
+  var x = Math.random() * 570;
+  var y = Math.random() * 570;
+
+  //Compruebo que no hay agua cerca de la nave
+  if (x < 30 && y < 30) {
+    x = x + 30;
+    y = y + 30;
+  }
+
+  //Compruebo que no hay agua cerca de la base
+  if (x > 540 && y > 540) {
+    x = x - 30;
+    y = y - 30;
+  }
+
+  //Pinto agua
+  ctx.beginPath();
+
+  ctx.drawImage(aguaImage, x, y, 20, 20);
+  ctx.strokeStyle = "aqua"; // rgb(0, 255, 255)
+  ctx.lineWidth = 2; // Ancho del borde
+  ctx.strokeRect(x, y, 20, 20);
+  ctx.closePath();
+  ctx.fill();
+}
+
+//Pintar reloj
+var relojImage = new Image();
+relojImage.src = "reloj.png";
+
+function pintarReloj() {
+  var x = Math.random() * 570;
+  var y = Math.random() * 570;
+
+  //Compruebo que no hay agua cerca de la nave
+  if (x < 30 && y < 30) {
+    x = x + 30;
+    y = y + 30;
+  }
+  //Compruebo que no hay agua cerca de la base
+  if (x > 540 && y > 540) {
+    x = x - 30;
+    y = y - 30;
+  }
+  //Pinto agua
+  ctx.beginPath();
+
+  ctx.drawImage(relojImage, x, y, 20, 20);
+  ctx.strokeStyle = "darkgreen"; // rgb(0, 100, 0)
+  ctx.lineWidth = 2; // Ancho del borde
+  ctx.strokeRect(x, y, 20, 20);
+  ctx.closePath();
+  ctx.fill();
 }
 
 //Muevo la nave
@@ -214,27 +279,29 @@ function actualizarContador() {
   //Compruebo si se ha quedado sin puntos
   if (contador === 0) {
     var mensaje =
-      "¡Lo siento! Te has quedado sin puntos. Pincha AQUÍ para volver a intentarlo.";
+      "¡Lo siento! Te has quedado sin puntos. Pincha AQUÍ para volver a intentarlo.";
     finalizar(mensaje);
   }
 }
+
+var haChocadoAgua = false;
+var haChocadoReloj = false;
 
 //Detecto colisiones con la base o los asteroides
 function detectarColision() {
   var pixels = 900; //Porque la imagen es de 30x30 pixels
   var elementos = pixels * 4; //Porque cada pixel tiene 4 bytes (RGBA)
 
-  //Recorro en busca del rojo (asteroide) o del azul (base)
+  //Recorro en busca del rojo (asteroide) o del azul (base) o del aqua (agua!!) o del darkgreen (reloj)
   for (var i = 0; i < elementos; i += 4) {
     //Asteroide (255, 0, 0)
-    console.log(fondoNave.data);
     if (
       fondoNave.data[i] === 255 &&
       fondoNave.data[i + 1] === 0 &&
       fondoNave.data[i + 2] === 0
     ) {
       var mensaje =
-        "¡Lo siento! Has chocado con un asteroide.<br>Pincha AQUÍ para volver a intentarlo.";
+        "¡Lo siento! Has chocado con un fuego.<br>Pincha AQUÍ para volver a intentarlo.";
       finalizar(mensaje);
       break;
     }
@@ -246,8 +313,42 @@ function detectarColision() {
       fondoNave.data[i + 2] === 255
     ) {
       var mensaje =
-        "¡Enhorabuena! Has llegado a la base.<br>Pincha AQUÍ para volver a jugar.";
+        "¡Enhorabuena! Has llegado al bebé.<br>Pincha AQUÍ para volver a jugar.";
       finalizar(mensaje);
+      break;
+    }
+
+    //Agua rgb(0, 255, 255)
+    if (
+      fondoNave.data[i] === 0 &&
+      fondoNave.data[i + 1] === 255 &&
+      fondoNave.data[i + 2] === 255 &&
+      haChocadoAgua === false
+    ) {
+      var mensaje =
+        "¡Enhorabuena! Has llegado al bebé.<br>Pincha AQUÍ para volver a jugar.";
+      //finalizar(mensaje);
+
+      contador += 20;
+      // Sumar 5 segundos
+      tiempo.setMilliseconds(tiempo.getMilliseconds() + 5000);
+
+      haChocadoAgua = true;
+      break;
+    }
+
+    // darkgreen rgb(0, 100, 0)
+    if (
+      fondoNave.data[i] === 0 &&
+      fondoNave.data[i + 1] === 100 &&
+      fondoNave.data[i + 2] === 0 &&
+      haChocadoReloj === false
+    ) {
+      contador += 5;
+      // Sumar 15 segundos
+      tiempo.setMilliseconds(tiempo.getMilliseconds() + 15000);
+
+      haChocadoReloj = true;
       break;
     }
   }
@@ -292,7 +393,7 @@ function temporizador() {
   //Compruebo si llega a 0 para finalizar el juego o continuar
   if (tiempo.getSeconds() <= 0) {
     var mensaje =
-      "¡Lo siento! Se ha terminado el tiempo.<br>Pincha AQUÍ para volver a intentarlo.";
+      "¡Lo siento! Se ha terminado el tiempo.<br>Pincha AQUÍ para volver a intentarlo.";
     finalizar(mensaje);
   } else {
     //Hago un loop para que se ejecute cada 500ms
@@ -306,4 +407,24 @@ function rellenaCeros(numero) {
   } else {
     return numero;
   }
+}
+
+///////
+
+const x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML =
+    "Latitude: " +
+    position.coords.latitude +
+    "<br>Longitude: " +
+    position.coords.longitude;
 }

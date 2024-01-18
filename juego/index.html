@@ -13,20 +13,30 @@
     <script type="text/javascript" src="js/script.js"></script>
   </head>
 
-  <body onload="canvasStars()">
+  <body onload="canvasStars()" style="display: flex">
     <div>
-      <h1>Misión: rescate</h1>
+      <div>
+        <h1>Misión: rescate</h1>
 
-      <span id="mensaje" onclick="reiniciar()"
-        >Intenta llegar al bebé sin chocarte con los fuegos y sin agotar los
-        puntos.</span
-      ><br />
+        <span id="mensaje" onclick="reiniciar()"
+          >Intenta llegar al bebé sin chocarte con los fuegos y sin agotar los
+          puntos. <br />¡El agua te dará más puntos y tiempo!</span
+        ><br />
 
-      Puntuación: <span id="puntuacion">40</span><br />
+        Puntuación: <span id="puntuacion">40</span><br />
 
-      Tiempo: <span id="tiempo">15</span>
+        Tiempo: <span id="tiempo">15</span>
+      </div>
+      <canvas id="miCanvas" width="600" height="600"></canvas>
     </div>
 
-    <canvas id="miCanvas" width="600" height="600"></canvas>
+    <div>
+      <h1>HTML Geolocation</h1>
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">Try It</button>
+
+      <p id="demo">HEHE</p>
+    </div>
   </body>
 </html>
