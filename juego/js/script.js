@@ -39,11 +39,9 @@ function canvasStars() {
 
   //LLamada al temporizador
   temporizador();
-
 }
 
-
-//Pinto el fondo 
+//Pinto el fondo
 function pintarFondo() {
   //Pinto el fondo gris
   ctx.fillStyle = "lightgray";
@@ -58,7 +56,7 @@ function pintarFondo() {
 }
 
 var bomberoImage = new Image();
-bomberoImage.src = "bombero.png"; // Reemplaza 'ruta_de_la_imagen' con la ruta correcta de tu imagen
+bomberoImage.src = "bombero.png";
 
 function pintarBombero() {
   ctx.drawImage(bomberoImage, 0, 0, 30, 30);
@@ -66,15 +64,15 @@ function pintarBombero() {
 }
 
 var bebeImage = new Image();
-bebeImage.src = "bebe.png"; // Reemplaza 'ruta_de_la_imagen' con la ruta correcta de tu imagen
+bebeImage.src = "bebe.png";
 
 function pintarBebe() {
   // Dibujar la imagen del bebe con un borde azul
-  ctx.drawImage(bebeImage, 570, 570, 30, 30); // Ajusta tamaño y posición según tus necesidades
+  ctx.drawImage(bebeImage, 570, 570, 30, 30);
 
   // Dibujar el borde azul
   ctx.strokeStyle = "blue";
-  ctx.lineWidth = 2; // Ancho del borde
+  ctx.lineWidth = 2;
   ctx.strokeRect(570, 570, 30, 30);
 }
 
@@ -100,14 +98,10 @@ function pintarFuegos() {
     }
 
     //Pinto un asteroide
-    // ctx.fillStyle = "red";
     ctx.beginPath();
-    // ctx.rect(x, y, 20, 20);
-
     ctx.drawImage(fuegoImage, x, y, 20, 20);
-    // ctx.fillStyle = "red";
     ctx.strokeStyle = "red";
-    ctx.lineWidth = 2; // Ancho del borde
+    ctx.lineWidth = 2;
     ctx.strokeRect(x, y, 20, 20);
     ctx.closePath();
     ctx.fill();
@@ -139,7 +133,7 @@ function pintarAgua() {
 
   ctx.drawImage(aguaImage, x, y, 20, 20);
   ctx.strokeStyle = "aqua"; // rgb(0, 255, 255)
-  ctx.lineWidth = 2; // Ancho del borde
+  ctx.lineWidth = 2;
   ctx.strokeRect(x, y, 20, 20);
   ctx.closePath();
   ctx.fill();
@@ -168,7 +162,7 @@ function pintarReloj() {
 
   ctx.drawImage(relojImage, x, y, 20, 20);
   ctx.strokeStyle = "darkgreen"; // rgb(0, 100, 0)
-  ctx.lineWidth = 2; // Ancho del borde
+  ctx.lineWidth = 2;
   ctx.strokeRect(x, y, 20, 20);
   ctx.closePath();
   ctx.fill();
@@ -279,8 +273,7 @@ function actualizarContador() {
   }
   //Compruebo si se ha quedado sin puntos
   if (contador === 0) {
-    var mensaje =
-      `¡Lo siento! Te has quedado sin puntos. Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
+    var mensaje = `¡Lo siento! Te has quedado sin puntos. Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
     finalizar(mensaje);
   }
 }
@@ -293,28 +286,26 @@ function detectarColision() {
   var pixels = 900; //Porque la imagen es de 30x30 pixels
   var elementos = pixels * 4; //Porque cada pixel tiene 4 bytes (RGBA)
 
-  //Recorro en busca del rojo (asteroide) o del azul (base) o del aqua (agua!!) o del darkgreen (reloj)
+  //Recorro en busca del rojo (fuego) o del azul (base) o del aqua (agua) o del darkgreen (reloj)
   for (var i = 0; i < elementos; i += 4) {
-    //Asteroide (255, 0, 0)
+    //Fuego (255, 0, 0)
     if (
       fondoBombero.data[i] === 255 &&
       fondoBombero.data[i + 1] === 0 &&
       fondoBombero.data[i + 2] === 0
     ) {
-      var mensaje =
-        `¡Lo siento! Has chocado con un fuego.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
+      var mensaje = `¡Lo siento! Has chocado con un fuego.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
       finalizar(mensaje);
       break;
     }
 
-    //Base (0, 0, 255)
+    //Bebe (0, 0, 255)
     if (
       fondoBombero.data[i] === 0 &&
       fondoBombero.data[i + 1] === 0 &&
       fondoBombero.data[i + 2] === 255
     ) {
-      var mensaje =
-        `¡Enhorabuena! Has llegado al bebé.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a jugar.`;
+      var mensaje = `¡Enhorabuena! Has llegado al bebé.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a jugar.`;
       finalizar(mensaje);
       break;
     }
@@ -326,10 +317,6 @@ function detectarColision() {
       fondoBombero.data[i + 2] === 255 &&
       haChocadoAgua === false
     ) {
-      var mensaje =
-        `¡Enhorabuena! Has llegado al bebé.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a jugar.`;
-      //finalizar(mensaje);
-
       contador += 20;
       // Sumar 5 segundos
       tiempo.setMilliseconds(tiempo.getMilliseconds() + 5000);
@@ -338,7 +325,7 @@ function detectarColision() {
       break;
     }
 
-    // darkgreen rgb(0, 100, 0)
+    //Reloj rgb(0, 100, 0)
     if (
       fondoBombero.data[i] === 0 &&
       fondoBombero.data[i + 1] === 100 &&
@@ -391,13 +378,9 @@ function temporizador() {
     spanTiempo.style.color = "#0F0";
   }
 
-
-  
-
   //Compruebo si llega a 0 para finalizar el juego o continuar
   if (tiempo.getSeconds() <= 0) {
-    var mensaje =
-      `¡Lo siento! Se ha terminado el tiempo.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
+    var mensaje = `¡Lo siento! Se ha terminado el tiempo.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
     finalizar(mensaje);
   } else {
     //Hago un loop para que se ejecute cada 500ms
@@ -444,5 +427,3 @@ function geoFindMe() {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 }
-
-
