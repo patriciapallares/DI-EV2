@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 
-<html>
-  <head>
-    <title>Space Stars</title>
+<html lang="ca">
 
-    <meta charset="UTF-8" />
+<head>
+  <title>Space Stars</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
 
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script type="text/javascript" src="js/script.js"></script>
-  </head>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-  <body onload="canvasStars()" style="display: flex">
+  <script type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body onload="canvasStars()" style="display: flex">
+  <div>
     <div>
-      <div>
-        <h1>Misión: rescate</h1>
+      <h1>Misión: rescate</h1>
 
-        <span id="mensaje" onclick="reiniciar()"
-          >Intenta llegar al bebé sin chocarte con los fuegos y sin agotar los
-          puntos. <br />¡El agua te dará más puntos y tiempo!</span
-        ><br />
+      <span id="mensaje" onclick="reiniciar()">Intenta llegar al bebé sin chocarte con los fuegos y sin agotar los
+        puntos. <br />¡El agua te dará más puntos y tiempo!</span><br />
 
-        Puntuación: <span id="puntuacion">40</span><br />
+      Puntuación: <span id="puntuacion">40</span><br />
 
-        Tiempo: <span id="tiempo">15</span>
-      </div>
-      <canvas id="miCanvas" width="600" height="600"></canvas>
+      Tiempo: <span id="tiempo">15</span>
     </div>
+    <canvas id="miCanvas" width="600" height="600"></canvas>
+  </div>
+  <div id="gusta">
+    <button id="find-me" onclick="geoFindMe()">Show my location</button><br />
+    <p id="status"></p>
+    <a id="map-link" target="_blank" style="color: white;"></a>
 
-    <div>
-      <h1>HTML Geolocation</h1>
-      <p>Click the button to get your coordinates.</p>
+  </div>
+</body>
 
-      <button onclick="getLocation()">Try It</button>
-
-      <p id="demo">HEHE</p>
-    </div>
-  </body>
 </html>
