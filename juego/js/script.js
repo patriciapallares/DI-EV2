@@ -1,17 +1,16 @@
-//Declaración de variables
+//Declaración de variablesbomberobombero
 var canvas, ctx;
-var naveX = 0; //Posición original en x de la nave
-var naveY = 0; //Posición original en y de la nave
-var nave = new Image(); //Imagen para capturar la nave
-var fondoNave = new Image(); //Imagen para capturar el fondo
+var bomberoX = 0; //Posición original en x del bombero
+var bomberoY = 0; //Posición original en y del bombero
+var bombero = new Image(); //Imagen para capturar el bombero
+var fondoBombero = new Image(); //Imagen para capturar el fondo
 var contador = 40; //Contador de movimientos
 var tiempo = new Date(15000); //Para tener solo 15 segundos en milisegundos
 var stop; //Para parar el tmporizador
 
+var empezarBtn = document.getElementById("empezar");
 console.log("hola");
 //Inicio el juego
-
-
 
 function canvasStars() {
   //Obtengo el elemento canvas
@@ -20,31 +19,33 @@ function canvasStars() {
   //Especifico el contexto 2D
   ctx = canvas.getContext("2d");
 
-  //Llamo a la función que pinta el fondo con las estrellas
+  //Llamo a la función que pinta el fondo
   pintarFondo();
 
-  //Llamo a la función que pinta la nave
-  pintarNave();
+  //Llamo a la función que pinta el bombero
+  pintarBombero();
 
-  //Llamo a la función que pinta la base
-  pintarBase();
+  //Llamo a la función que pinta el bebe
+  pintarBebe();
 
-  //Llamo a la función que pinta los asteroides
-  pintarAsteroides();
+  //Llamo a la función que pinta los fuegos
+  pintarFuegos();
 
   pintarAgua();
   pintarReloj();
 
   //Añado el escuchador del teclado
-  window.addEventListener("keydown", moverNave, true);
+  window.addEventListener("keydown", moverBombero, true);
 
   //LLamada al temporizador
   temporizador();
+
 }
 
-//Pinto el fondo con las estrellas
+
+//Pinto el fondo 
 function pintarFondo() {
-  //Pinto el fondo negro
+  //Pinto el fondo gris
   ctx.fillStyle = "lightgray";
   ctx.beginPath();
   ctx.rect(0, 0, 600, 600); //posición x, posición y, ancho, alto (en píxeles)
@@ -52,25 +53,23 @@ function pintarFondo() {
   ctx.closePath();
   ctx.fill();
 
-  //Guardo el fondo de detrás de la nave como imagen
-  fondoNave = ctx.getImageData(0, 0, 30, 30);
+  //Guardo el fondo de detrás del bombero como imagen
+  fondoBombero = ctx.getImageData(0, 0, 30, 30);
 }
 
 var bomberoImage = new Image();
 bomberoImage.src = "bombero.png"; // Reemplaza 'ruta_de_la_imagen' con la ruta correcta de tu imagen
 
-function pintarNave() {
-  // Asegúrate de que la imagen esté cargada antes de dibujarla
+function pintarBombero() {
   ctx.drawImage(bomberoImage, 0, 0, 30, 30);
-
-  nave = ctx.getImageData(0, 0, 30, 30);
+  bombero = ctx.getImageData(0, 0, 30, 30);
 }
 
 var bebeImage = new Image();
 bebeImage.src = "bebe.png"; // Reemplaza 'ruta_de_la_imagen' con la ruta correcta de tu imagen
 
-function pintarBase() {
-  // Dibujar la imagen de la base con un borde azul
+function pintarBebe() {
+  // Dibujar la imagen del bebe con un borde azul
   ctx.drawImage(bebeImage, 570, 570, 30, 30); // Ajusta tamaño y posición según tus necesidades
 
   // Dibujar el borde azul
@@ -79,22 +78,22 @@ function pintarBase() {
   ctx.strokeRect(570, 570, 30, 30);
 }
 
-//Pintar asteroides
+//Pintar fuegos
 var fuegoImage = new Image();
 fuegoImage.src = "fire-png.png";
 
-function pintarAsteroides() {
+function pintarFuegos() {
   for (i = 0; i < 30; i++) {
     var x = Math.random() * 570;
     var y = Math.random() * 570;
 
-    //Compruebo que no hay asteroides cerca de la nave
+    //Compruebo que no hay fuegos cerca del bombero
     if (x < 30 && y < 30) {
       x = x + 30;
       y = y + 30;
     }
 
-    //Compruebo que no hay asteroides cerca de la base
+    //Compruebo que no hay fuegos cerca del bebe
     if (x > 540 && y > 540) {
       x = x - 30;
       y = y - 30;
@@ -123,13 +122,13 @@ function pintarAgua() {
   var x = Math.random() * 570;
   var y = Math.random() * 570;
 
-  //Compruebo que no hay agua cerca de la nave
+  //Compruebo que no hay agua cerca del bombero
   if (x < 30 && y < 30) {
     x = x + 30;
     y = y + 30;
   }
 
-  //Compruebo que no hay agua cerca de la base
+  //Compruebo que no hay agua cerca del bebe
   if (x > 540 && y > 540) {
     x = x - 30;
     y = y - 30;
@@ -154,12 +153,12 @@ function pintarReloj() {
   var x = Math.random() * 570;
   var y = Math.random() * 570;
 
-  //Compruebo que no hay agua cerca de la nave
+  //Compruebo que no hay agua cerca del bombero
   if (x < 30 && y < 30) {
     x = x + 30;
     y = y + 30;
   }
-  //Compruebo que no hay agua cerca de la base
+  //Compruebo que no hay agua cerca del bebe
   if (x > 540 && y > 540) {
     x = x - 30;
     y = y - 30;
@@ -175,8 +174,8 @@ function pintarReloj() {
   ctx.fill();
 }
 
-//Muevo la nave
-function moverNave(evento) {
+//Muevo el bombero
+function moverBombero(evento) {
   //Detecto la tecla que estoy pulsando
   switch (evento.keyCode) {
     //Izquierda: 37 o 65 (flecha izquierda o letra A)
@@ -185,17 +184,17 @@ function moverNave(evento) {
       //Actualizar contador
       actualizarContador();
       //Compruebo si se va a salir por la izquierda
-      if (naveX === 0) {
+      if (bomberoX === 0) {
         break;
       }
-      //Borro la nave (pintando fondoNave encima)
-      ctx.putImageData(fondoNave, naveX, naveY);
+      //Borro el bombero (pintando fondoBombero encima)
+      ctx.putImageData(fondoBombero, bomberoX, bomberoY);
       //Actualizo la x
-      naveX = naveX - 30;
+      bomberoX = bomberoX - 30;
       //Capturo el fondo que voy a tapar
-      fondoNave = ctx.getImageData(naveX, naveY, 30, 30);
-      //Muevo la nave
-      ctx.putImageData(nave, naveX, naveY);
+      fondoBombero = ctx.getImageData(bomberoX, bomberoY, 30, 30);
+      //Muevo el bombero
+      ctx.putImageData(bombero, bomberoX, bomberoY);
       //Compruebo colisión
       detectarColision();
       break;
@@ -205,17 +204,17 @@ function moverNave(evento) {
       //Actualizar contador
       actualizarContador();
       //Compruebo si se va a salir por la derecha
-      if (naveX === 570) {
+      if (bomberoX === 570) {
         break;
       }
-      //Borro la nave (pintando fondoNave encima)
-      ctx.putImageData(fondoNave, naveX, naveY);
+      //Borro el bombero (pintando fondoBombero encima)
+      ctx.putImageData(fondoBombero, bomberoX, bomberoY);
       //Actualizo la x
-      naveX = naveX + 30;
+      bomberoX = bomberoX + 30;
       //Capturo el fondo que voy a tapar
-      fondoNave = ctx.getImageData(naveX, naveY, 30, 30);
-      //Muevo la nave
-      ctx.putImageData(nave, naveX, naveY);
+      fondoBombero = ctx.getImageData(bomberoX, bomberoY, 30, 30);
+      //Muevo el bombero
+      ctx.putImageData(bombero, bomberoX, bomberoY);
       //Compruebo colisión
       detectarColision();
       break;
@@ -225,17 +224,17 @@ function moverNave(evento) {
       //Actualizar contador
       actualizarContador();
       //Compruebo si se va a salir por arriba
-      if (naveY === 0) {
+      if (bomberoY === 0) {
         break;
       }
-      //Borro la nave (pintando fondoNave encima)
-      ctx.putImageData(fondoNave, naveX, naveY);
+      //Borro el bombero (pintando fondoBombero encima)
+      ctx.putImageData(fondoBombero, bomberoX, bomberoY);
       //Actualizo la y
-      naveY = naveY - 30;
+      bomberoY = bomberoY - 30;
       //Capturo el fondo que voy a tapar
-      fondoNave = ctx.getImageData(naveX, naveY, 30, 30);
-      //Muevo la nave
-      ctx.putImageData(nave, naveX, naveY);
+      fondoBombero = ctx.getImageData(bomberoX, bomberoY, 30, 30);
+      //Muevo el bombero
+      ctx.putImageData(bombero, bomberoX, bomberoY);
       //Compruebo colisión
       detectarColision();
       break;
@@ -245,17 +244,17 @@ function moverNave(evento) {
       //Actualizar contador
       actualizarContador();
       //Compruebo si se va a salir por abajo
-      if (naveY === 570) {
+      if (bomberoY === 570) {
         break;
       }
-      //Borro la nave (pintando fondoNave encima)
-      ctx.putImageData(fondoNave, naveX, naveY);
+      //Borro el bombero (pintando fondoBombero encima)
+      ctx.putImageData(fondoBombero, bomberoX, bomberoY);
       //Actualizo la y
-      naveY = naveY + 30;
+      bomberoY = bomberoY + 30;
       //Capturo el fondo que voy a tapar
-      fondoNave = ctx.getImageData(naveX, naveY, 30, 30);
-      //Muevo la nave
-      ctx.putImageData(nave, naveX, naveY);
+      fondoBombero = ctx.getImageData(bomberoX, bomberoY, 30, 30);
+      //Muevo el bombero
+      ctx.putImageData(bombero, bomberoX, bomberoY);
       //Compruebo colisión
       detectarColision();
       break;
@@ -281,7 +280,7 @@ function actualizarContador() {
   //Compruebo si se ha quedado sin puntos
   if (contador === 0) {
     var mensaje =
-      "¡Lo siento! Te has quedado sin puntos. Pincha AQUÍ para volver a intentarlo.";
+      `¡Lo siento! Te has quedado sin puntos. Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
     finalizar(mensaje);
   }
 }
@@ -289,7 +288,7 @@ function actualizarContador() {
 var haChocadoAgua = false;
 var haChocadoReloj = false;
 
-//Detecto colisiones con la base o los asteroides
+//Detecto colisiones con el bebe o los fuegos
 function detectarColision() {
   var pixels = 900; //Porque la imagen es de 30x30 pixels
   var elementos = pixels * 4; //Porque cada pixel tiene 4 bytes (RGBA)
@@ -298,37 +297,37 @@ function detectarColision() {
   for (var i = 0; i < elementos; i += 4) {
     //Asteroide (255, 0, 0)
     if (
-      fondoNave.data[i] === 255 &&
-      fondoNave.data[i + 1] === 0 &&
-      fondoNave.data[i + 2] === 0
+      fondoBombero.data[i] === 255 &&
+      fondoBombero.data[i + 1] === 0 &&
+      fondoBombero.data[i + 2] === 0
     ) {
       var mensaje =
-        "¡Lo siento! Has chocado con un fuego.<br>Pincha AQUÍ para volver a intentarlo.";
+        `¡Lo siento! Has chocado con un fuego.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
       finalizar(mensaje);
       break;
     }
 
     //Base (0, 0, 255)
     if (
-      fondoNave.data[i] === 0 &&
-      fondoNave.data[i + 1] === 0 &&
-      fondoNave.data[i + 2] === 255
+      fondoBombero.data[i] === 0 &&
+      fondoBombero.data[i + 1] === 0 &&
+      fondoBombero.data[i + 2] === 255
     ) {
       var mensaje =
-        "¡Enhorabuena! Has llegado al bebé.<br>Pincha AQUÍ para volver a jugar.";
+        `¡Enhorabuena! Has llegado al bebé.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a jugar.`;
       finalizar(mensaje);
       break;
     }
 
     //Agua rgb(0, 255, 255)
     if (
-      fondoNave.data[i] === 0 &&
-      fondoNave.data[i + 1] === 255 &&
-      fondoNave.data[i + 2] === 255 &&
+      fondoBombero.data[i] === 0 &&
+      fondoBombero.data[i + 1] === 255 &&
+      fondoBombero.data[i + 2] === 255 &&
       haChocadoAgua === false
     ) {
       var mensaje =
-        "¡Enhorabuena! Has llegado al bebé.<br>Pincha AQUÍ para volver a jugar.";
+        `¡Enhorabuena! Has llegado al bebé.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a jugar.`;
       //finalizar(mensaje);
 
       contador += 20;
@@ -341,9 +340,9 @@ function detectarColision() {
 
     // darkgreen rgb(0, 100, 0)
     if (
-      fondoNave.data[i] === 0 &&
-      fondoNave.data[i + 1] === 100 &&
-      fondoNave.data[i + 2] === 0 &&
+      fondoBombero.data[i] === 0 &&
+      fondoBombero.data[i + 1] === 100 &&
+      fondoBombero.data[i + 2] === 0 &&
       haChocadoReloj === false
     ) {
       contador += 5;
@@ -363,7 +362,7 @@ function finalizar(mensaje) {
   //Escribo el mensaje en ese elemento
   spanMensaje.innerHTML = mensaje;
   //Bloqueo el movimiento del teclado
-  window.removeEventListener("keydown", moverNave, true);
+  window.removeEventListener("keydown", moverBombero, true);
   clearTimeout(stop);
 }
 
@@ -392,10 +391,13 @@ function temporizador() {
     spanTiempo.style.color = "#0F0";
   }
 
+
+  
+
   //Compruebo si llega a 0 para finalizar el juego o continuar
   if (tiempo.getSeconds() <= 0) {
     var mensaje =
-      "¡Lo siento! Se ha terminado el tiempo.<br>Pincha AQUÍ para volver a intentarlo.";
+      `¡Lo siento! Se ha terminado el tiempo.<br>Pincha <span class="amarillo">AQUÍ</span> para volver a intentarlo.`;
     finalizar(mensaje);
   } else {
     //Hago un loop para que se ejecute cada 500ms

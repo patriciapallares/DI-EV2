@@ -4,13 +4,9 @@
 
 <head>
   <title>Space Stars</title>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="stylesheet" type="text/css" href="css/style.css" />
-
   <script type="text/javascript" src="js/script.js"></script>
 </head>
 
@@ -20,19 +16,19 @@
       <h1>Misión: rescate</h1>
 
       <span id="mensaje" onclick="reiniciar()">Intenta llegar al bebé sin chocarte con los fuegos y sin agotar los
-        puntos. <br />¡El agua te dará más puntos y tiempo!</span><br />
+        puntos. <br />¡El agua te dará más puntos <br />y el reloj te dará más tiempo!</span><br />
 
       Puntuación: <span id="puntuacion">40</span><br />
-
       Tiempo: <span id="tiempo">15</span>
     </div>
+
+
     <canvas id="miCanvas" width="600" height="600"></canvas>
   </div>
-  <div id="gusta">
+  <div>
     <button id="find-me" onclick="geoFindMe()">Show my location</button><br />
     <p id="status"></p>
     <a id="map-link" target="_blank" style="color: white;"></a>
-
   </div>
 </body>
 
