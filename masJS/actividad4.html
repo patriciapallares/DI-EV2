@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 4</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #coordinates {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="coordinates">Coordenadas: (0, 0)</div>
+
+    <script>
+      document.addEventListener("mousemove", function (event) {
+        // Coordenadas de la pantalla
+        var screenX = event.screenX;
+        var screenY = event.screenY;
+
+        // Coordenadas de la página
+        var pageX = event.pageX;
+        var pageY = event.pageY;
+
+        // Coordenadas del cliente (relativas al área de la ventana del navegador)
+        var clientX = event.clientX;
+        var clientY = event.clientY;
+
+        // Actualizar el contenido del elemento con id "coordinates"
+        document.getElementById("coordinates").innerHTML =
+          "Coordenadas:<br>" +
+          "Screen - X: " +
+          screenX +
+          ", Y: " +
+          screenY +
+          "<br>" +
+          "Page - X: " +
+          pageX +
+          ", Y: " +
+          pageY +
+          "<br>" +
+          "Client - X: " +
+          clientX +
+          ", Y: " +
+          clientY;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>División de Pantalla</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        height: 100vh;
+      }
+
+      .quadrant {
+        flex: 1;
+        cursor: pointer;
+      }
+
+      #red {
+        background-color: lightcoral;
+      }
+      #yellow {
+        background-color: lightyellow;
+      }
+      #blue {
+        background-color: lightblue;
+      }
+      #green {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="red" class="quadrant" onclick="showColor('Rojo')"></div>
+    <div id="yellow" class="quadrant" onclick="showColor('Amarillo')"></div>
+    <div id="blue" class="quadrant" onclick="showColor('Azul')"></div>
+    <div id="green" class="quadrant" onclick="showColor('Verde')"></div>
+
+    <script>
+      function showColor(color) {
+        alert("Has hecho clic en la zona de color " + color);
+      }
+    </script>
+  </body>
+</html>
