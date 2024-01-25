@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 9</title>
+</head>
+
+<body>
+
+    <!-- Crea dos formularios. El primero pedirá al usuario su nombre, apellido, teléfono, 
+        correo electrónico y dni. El segundo pedirá su dirección: dirección, código postal, 
+        localidad y provincia. Comprueba mediante expresiones regulares y lanzando un alert que:
+
+    Nombre y apellido no tengan números y no estén vacíos.
+    Que el DNI sea de la forma nueve digitos + letra.
+    Que el teléfono tenga nueve digitos exclusivamente.
+    Que el correo electrónico sea de la forma texto@texto.texto
+    Coloca el foco en el segundo elemento del primer formulario por defecto (apellido).
+
+    La validación se debe hacer mediante clases asociadas a los elementos del formulario. 
+    Por ejemplo: <input type="text" id="nombre" name="nombre" class="requerido texto" />
+     -->
+
+
+    <!-- Formulario 1 -->
+    <form onsubmit="return validarFormulario1()" style="border: 2px green solid; display: block; width: 500px;">
+        <h2>Formularió información:</h2>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" class="requerido texto" />
+        <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" class="requerido texto" />
+        <br>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" class="requerido" />
+        <br>
+        <label for="correo">Correo Electrónico:</label>
+        <input type="text" id="correo" name="correo" class="requerido" />
+        <br>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" class="requerido" />
+        <br>
+        <input type="submit" value="Enviar" />
+    </form>
+
+    <!-- Formulario 2 -->
+    <form onsubmit="return validarFormulario2()" style="border: 2px blue solid; display: block; width: 500px;">
+        <h2>Formularió dirección:</h2>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" class="requerido" />
+        <br>
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" id="codigoPostal" name="codigoPostal" class="requerido" />
+<br>
+        <label for="localidad">Localidad:</label>
+        <input type="text" id="localidad" name="localidad" class="requerido texto" />
+<br>
+        <label for="provincia">Provincia:</label>
+        <input type="text" id="provincia" name="provincia" class="requerido texto" />
+<br>
+        <input type="submit" value="Enviar" />
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Establecer el foco en el segundo elemento del primer formulario por defecto
+            document.getElementById('apellido').focus();
+        });
+
+        function validarFormulario1() {
+            var nombre = document.getElementById('nombre').value.trim();
+            var apellido = document.getElementById('apellido').value.trim();
+            var telefono = document.getElementById('telefono').value.trim();
+            var correo = document.getElementById('correo').value.trim();
+            var dni = document.getElementById('dni').value.trim();
+
+            // Expresiones regulares para la validación
+            var regexSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
+            var regexDNI = /^\d{8}[a-zA-Z]$/;
+            var regexTelefono = /^\d{9}$/;
+            var regexCorreo = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+            // Validación de nombre y apellido
+            if (!regexSoloLetras.test(nombre) || nombre === '') {
+                alert('Nombre inválido. Debe contener solo letras y no estar vacío.');
+                return false;
+            }
+
+            if (!regexSoloLetras.test(apellido) || apellido === '') {
+                alert('Apellido inválido. Debe contener solo letras y no estar vacío.');
+                return false;
+            }
+
+            // Validación de DNI
+            if (!regexDNI.test(dni)) {
+                alert('DNI inválido. Debe tener nueve dígitos seguidos de una letra.');
+                return false;
+            }
+
+            // Validación de teléfono
+            if (!regexTelefono.test(telefono)) {
+                alert('Teléfono inválido. Debe tener nueve dígitos.');
+                return false;
+            }
+
+            // Validación de correo electrónico
+            if (!regexCorreo.test(correo)) {
+                alert('Correo electrónico inválido. Debe tener el formato texto@texto.texto.');
+                return false;
+            }
+
+            // Si la validación es exitosa, puedes enviar el formulario
+            alert('Formulario 1 validado correctamente.');
+            return true;
+        }
+
+        function validarFormulario2() {
+            var direccion = document.getElementById('direccion').value.trim();
+            var codigoPostal = document.getElementById('codigoPostal').value.trim();
+            var localidad = document.getElementById('localidad').value.trim();
+            var provincia = document.getElementById('provincia').value.trim();
+
+            // Aquí puedes agregar validaciones adicionales para el formulario 2 si es necesario
+
+            // Si la validación es exitosa, puedes enviar el formulario
+            alert('Formulario 2 validado correctamente.');
+            return true;
+        }
+    </script>
+</body>
+
+</html>
