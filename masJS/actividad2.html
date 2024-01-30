@@ -1,62 +1,80 @@
 <!DOCTYPE html>
 <html lang="ca">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Ejercicio 1</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Actividad 2</title>
     <style>
-        .hide {
-            display: none;
-        }
+      .hide {
+        display: none;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-    <p id="contenidos_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
-        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
-        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
-        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
-        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
-        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
-    <a id="enlace_1" href="#" onclick="muestraOculta(this)">Ocultar contenidos</a>
-
-    <br />
-
-    <p id="contenidos_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
-        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
-        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
-        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
-        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
-        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
-    <a id="enlace_2" href="#" onclick="muestraOculta(this)">Ocultar contenidos</a>
+  <body>
+    <p id="contenidos_1">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim
+      vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+      commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere
+      vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id,
+      aliquam vitae, ultrices porttitor, pede. Nullam sit amet nisl elementum
+      elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut,
+      rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio
+      urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit
+      amet, consectetuer adipiscing elit. Duis scelerisque.
+    </p>
+    <a id="enlace_1" href="#" onclick="muestraOculta(this)"
+      >Ocultar contenidos</a
+    >
 
     <br />
 
-    <p id="contenidos_3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
-        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
-        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
-        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
-        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
-        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
-    <a id="enlace_3" href="#" onclick="muestraOculta(this)">Ocultar contenidos</a>
+    <p id="contenidos_2">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim
+      vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+      commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere
+      vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id,
+      aliquam vitae, ultrices porttitor, pede. Nullam sit amet nisl elementum
+      elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut,
+      rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio
+      urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit
+      amet, consectetuer adipiscing elit. Duis scelerisque.
+    </p>
+    <a id="enlace_2" href="#" onclick="muestraOculta(this)"
+      >Ocultar contenidos</a
+    >
+
+    <br />
+
+    <p id="contenidos_3">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim
+      vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue,
+      commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere
+      vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id,
+      aliquam vitae, ultrices porttitor, pede. Nullam sit amet nisl elementum
+      elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut,
+      rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio
+      urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit
+      amet, consectetuer adipiscing elit. Duis scelerisque.
+    </p>
+    <a id="enlace_3" href="#" onclick="muestraOculta(this)"
+      >Ocultar contenidos</a
+    >
 
     <script>
-        function muestraOculta(enlace) {
-            let parrafo = enlace.previousSibling;
+      function muestraOculta(enlace) {
+        let parrafo = enlace.previousSibling;
 
-            while (parrafo.nodeType !== 1) {
-                parrafo = parrafo.previousSibling;
-            }
-
-            parrafo.classList.toggle('hide');
-            if (parrafo.classList.contains('hide')) {
-                enlace.innerHTML = "Mostrar contenidos";
-            } else {
-                enlace.innerHTML = "Ocultar contenidos";
-            }
+        while (parrafo.nodeType !== 1) {
+          parrafo = parrafo.previousSibling;
         }
-    </script>
-</body>
 
+        parrafo.classList.toggle("hide");
+        if (parrafo.classList.contains("hide")) {
+          enlace.innerHTML = "Mostrar contenidos";
+        } else {
+          enlace.innerHTML = "Ocultar contenidos";
+        }
+      }
+    </script>
+  </body>
 </html>

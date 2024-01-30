@@ -1,141 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formularios con Validación</title>
-  <style>
-    .error {
-      border: 2px solid red;
-    }
-  </style>
-</head>
-<body>
-    <!-- Modifica el ejercicio anterior para que cada vez que haya un error aplique un estilo al campo 
-        que origina el error y no envíe el formulario. Cada vez que se le de a enviar, debe “borrar” 
-        los errores previos.
-     -->
-<!-- Formulario 1 -->
-<form id="formulario1" onsubmit="return validarFormulario1()">
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" class="requerido texto" />
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 9</title>
+    <style>
+      .error {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
 
-  <label for="apellido">Apellido:</label>
-  <input type="text" id="apellido" name="apellido" class="requerido texto" />
+  <body>
+    <!-- Formulario 1 -->
+    <form
+      onsubmit="return validarFormulario1()"
+      style="border: 2px green solid; display: block; width: 500px"
+    >
+      <h2>Formularió información:</h2>
 
-  <label for="telefono">Teléfono:</label>
-  <input type="text" id="telefono" name="telefono" class="requerido" />
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" class="requerido texto" />
+      <br />
+      <label for="apellido">Apellido:</label>
+      <input
+        type="text"
+        id="apellido"
+        name="apellido"
+        class="requerido texto"
+      />
+      <br />
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" name="telefono" class="requerido" />
+      <br />
+      <label for="correo">Correo Electrónico:</label>
+      <input type="text" id="correo" name="correo" class="requerido" />
+      <br />
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" name="dni" class="requerido" />
+      <br />
+      <input type="submit" value="Enviar" />
+    </form>
 
-  <label for="correo">Correo Electrónico:</label>
-  <input type="text" id="correo" name="correo" class="requerido" />
+    <!-- Formulario 2 -->
+    <form
+      onsubmit="return validarFormulario2()"
+      style="border: 2px blue solid; display: block; width: 500px"
+    >
+      <h2>Formularió dirección:</h2>
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" name="direccion" class="requerido" />
+      <br />
+      <label for="codigoPostal">Código Postal:</label>
+      <input
+        type="text"
+        id="codigoPostal"
+        name="codigoPostal"
+        class="requerido"
+      />
+      <br />
+      <label for="localidad">Localidad:</label>
+      <input
+        type="text"
+        id="localidad"
+        name="localidad"
+        class="requerido texto"
+      />
+      <br />
+      <label for="provincia">Provincia:</label>
+      <input
+        type="text"
+        id="provincia"
+        name="provincia"
+        class="requerido texto"
+      />
+      <br />
+      <input type="submit" value="Enviar" />
+    </form>
 
-  <label for="dni">DNI:</label>
-  <input type="text" id="dni" name="dni" class="requerido" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("apellido").focus();
+      });
 
-  <input type="submit" value="Enviar" />
-</form>
+      function validarFormulario1() {
+        borrarErrores();
 
-<!-- Formulario 2 -->
-<form id="formulario2" onsubmit="return validarFormulario2()">
-  <label for="direccion">Dirección:</label>
-  <input type="text" id="direccion" name="direccion" class="requerido" />
+        var nombre = document.getElementById("nombre");
+        var apellido = document.getElementById("apellido");
+        var telefono = document.getElementById("telefono");
+        var correo = document.getElementById("correo");
+        var dni = document.getElementById("dni");
 
-  <label for="codigoPostal">Código Postal:</label>
-  <input type="text" id="codigoPostal" name="codigoPostal" class="requerido" />
+        var regexSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
+        var regexDNI = /^\d{8}[a-zA-Z]$/;
+        var regexTelefono = /^\d{9}$/;
+        var regexCorreo = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-  <label for="localidad">Localidad:</label>
-  <input type="text" id="localidad" name="localidad" class="requerido texto" />
+        if (!regexSoloLetras.test(nombre.value) || nombre.value === "") {
+          marcarError(nombre);
+          return false;
+        }
 
-  <label for="provincia">Provincia:</label>
-  <input type="text" id="provincia" name="provincia" class="requerido texto" />
+        if (!regexSoloLetras.test(apellido.value) || apellido.value === "") {
+          marcarError(apellido);
+          return false;
+        }
 
-  <input type="submit" value="Enviar" />
-</form>
+        // Validación de DNI
+        if (!regexDNI.test(dni.value)) {
+          marcarError(dni);
+          return false;
+        }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Establecer el foco en el segundo elemento del primer formulario por defecto
-      document.getElementById('apellido').focus();
-    });
+        // Validación de teléfono
+        if (!regexTelefono.test(telefono.value)) {
+          marcarError(telefono);
+          return false;
+        }
 
-    function validarFormulario1() {
-      // Borrar errores previos
-      borrarErrores('formulario1');
+        // Validación de correo electrónico
+        if (!regexCorreo.test(correo.value)) {
+          marcarError(correo);
+          return false;
+        }
 
-      var nombre = document.getElementById('nombre');
-      var apellido = document.getElementById('apellido');
-      var telefono = document.getElementById('telefono');
-      var correo = document.getElementById('correo');
-      var dni = document.getElementById('dni');
-
-      // Expresiones regulares para la validación
-      var regexSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/;
-      var regexDNI = /^\d{8}[a-zA-Z]$/;
-      var regexTelefono = /^\d{9}$/;
-      var regexCorreo = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-      // Validación de nombre y apellido
-      if (!regexSoloLetras.test(nombre.value) || nombre.value === '') {
-        marcarError(nombre);
-        return false;
+        alert("Formulario 1 validado correctamente.");
+        return true;
       }
 
-      if (!regexSoloLetras.test(apellido.value) || apellido.value === '') {
-        marcarError(apellido);
-        return false;
+      function validarFormulario2() {
+        borrarErrores();
+
+        var direccion = document.getElementById("direccion");
+        var codigoPostal = document.getElementById("codigoPostal");
+        var localidad = document.getElementById("localidad");
+        var provincia = document.getElementById("provincia");
+
+        var regexcodigoPostal = /^\d{5}$/;
+        if (!regexcodigoPostal.test(codigoPostal) || codigoPostal === "") {
+          alert("CP inválido. Debe tener cinco dígitos y no estar vacío.");
+          return false;
+        }
+
+        alert("Formulario 2 validado correctamente.");
+        return true;
       }
 
-      // Validación de DNI
-      if (!regexDNI.test(dni.value)) {
-        marcarError(dni);
-        return false;
+      function marcarError(elemento) {
+        elemento.classList.add("error");
       }
 
-      // Validación de teléfono
-      if (!regexTelefono.test(telefono.value)) {
-        marcarError(telefono);
-        return false;
+      function borrarErrores() {
+        var elementos = document.querySelectorAll(".error");
+        elementos.forEach(function (elemento) {
+          elemento.classList.remove("error");
+        });
       }
-
-      // Validación de correo electrónico
-      if (!regexCorreo.test(correo.value)) {
-        marcarError(correo);
-        return false;
-      }
-
-      // Si la validación es exitosa, puedes enviar el formulario
-      alert('Formulario 1 validado correctamente.');
-      return true;
-    }
-
-    function validarFormulario2() {
-      // Borrar errores previos
-      borrarErrores('formulario2');
-
-      var direccion = document.getElementById('direccion');
-      var codigoPostal = document.getElementById('codigoPostal');
-      var localidad = document.getElementById('localidad');
-      var provincia = document.getElementById('provincia');
-
-      // Aquí puedes agregar validaciones adicionales para el formulario 2 si es necesario
-
-      // Si la validación es exitosa, puedes enviar el formulario
-      alert('Formulario 2 validado correctamente.');
-      return true;
-    }
-
-    function marcarError(elemento) {
-      elemento.classList.add('error');
-    }
-
-    function borrarErrores(formulario) {
-      var elementos = document.getElementById(formulario).getElementsByTagName('input');
-      for (var i = 0; i < elementos.length; i++) {
-        elementos[i].classList.remove('error');
-      }
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
-

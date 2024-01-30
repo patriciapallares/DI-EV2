@@ -3,39 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>División de Pantalla</title>
+    <title>Actividad 6</title>
     <style>
       body {
         margin: 0;
+        margin-top: 20px;
         overflow: hidden;
         display: flex;
-        height: 100vh;
+        flex-direction: row;
+        height: 50vh;
       }
-
       .quadrant {
         flex: 1;
-        cursor: pointer;
       }
-
-      #red {
+      #rojo {
         background-color: lightcoral;
       }
-      #yellow {
+      #amarillo {
         background-color: lightyellow;
       }
-      #blue {
+      #azul {
         background-color: lightblue;
       }
-      #green {
+      #verde {
         background-color: lightgreen;
       }
     </style>
   </head>
   <body>
-    <div id="red" class="quadrant" onclick="showColor('Rojo')"></div>
-    <div id="yellow" class="quadrant" onclick="showColor('Amarillo')"></div>
-    <div id="blue" class="quadrant" onclick="showColor('Azul')"></div>
-    <div id="green" class="quadrant" onclick="showColor('Verde')"></div>
+    <div id="rojo" class="quadrant" onclick="showColor('rojo')"></div>
+    <div id="amarillo" class="quadrant" onclick="showColor('amarillo')"></div>
+    <div id="azul" class="quadrant" onclick="showColor('azul')"></div>
+    <div id="verde" class="quadrant" onclick="showColor('verde')"></div>
 
     <script>
       function showColor(color) {

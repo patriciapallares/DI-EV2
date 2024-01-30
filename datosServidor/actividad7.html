@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    th,
+    td {
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <!-- Pendiente No funciona del todo -->
+    <h2>The XMLHttpRequest Object</h2>
+
+    <form action="">
+      <label> Introduce customerID</label>
+      <input type="text" id="companyInput" placeholder="Enter a company" />
+      <button type="button" onclick="searchCompany()">Search</button>
+    </form>
+    <br />
+    <div id="txtHint">Company info will be listed here...</div>
+
+    <script>
+      function searchCompany() {
+        const company = document.getElementById("companyInput").value.trim();
+        if (company === "") {
+          document.getElementById("txtHint").innerHTML =
+            "Please enter a company.";
+          return;
+        }
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          handleResponse(this.responseText);
+        };
+        xhttp.open("GET", "getcustomer.php?q=" + encodeURIComponent(company));
+        xhttp.send();
+      }
+
+      function handleResponse(response) {
+        document.getElementById("txtHint").innerHTML = response;
+
+        const table = document.querySelector("#txtHint table");
+        if (!table || table.rows.length <= 1) {
+          document.getElementById("txtHint").innerHTML =
+            "La empresa buscada no existe.";
+        }
+      }
+    </script>
+  </body>
+</html>

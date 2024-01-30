@@ -8,11 +8,12 @@
       body {
         margin: 0;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
       }
       #coordinates {
-        position: absolute;
-        top: 10px;
-        left: 10px;
         font-family: Arial, sans-serif;
         font-size: 16px;
       }
@@ -23,32 +24,28 @@
 
     <script>
       document.addEventListener("mousemove", function (event) {
-        // Coordenadas de la pantalla
         var screenX = event.screenX;
         var screenY = event.screenY;
 
-        // Coordenadas de la página
         var pageX = event.pageX;
         var pageY = event.pageY;
 
-        // Coordenadas del cliente (relativas al área de la ventana del navegador)
         var clientX = event.clientX;
         var clientY = event.clientY;
 
-        // Actualizar el contenido del elemento con id "coordinates"
         document.getElementById("coordinates").innerHTML =
           "Coordenadas:<br>" +
-          "Screen - X: " +
+          "Pantalla - X: " +
           screenX +
           ", Y: " +
           screenY +
           "<br>" +
-          "Page - X: " +
+          "Página - X: " +
           pageX +
           ", Y: " +
           pageY +
           "<br>" +
-          "Client - X: " +
+          "Cliente - X: " +
           clientX +
           ", Y: " +
           clientY;

@@ -1,75 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información sobre la zona de clic</title>
-  <script type="text/javascript">
-    function informacion(elEvento) {
-      var evento = elEvento || window.event;
-      var tamanoVentana = tamanoVentanaNavegador();
-
-      // Coordenadas del clic
-      var x = evento.clientX;
-      var y = evento.clientY;
-
-      // Determinar la zona de la pantalla
-      var zona = determinarZona(x, y, tamanoVentana);
-
-      // Mostrar la información al usuario
-      muestraInformacion(['Has hecho clic en la zona:', zona]);
-    }
-
-    function muestraInformacion(mensaje) {
-      document.getElementById("info").innerHTML = '<h1>' + mensaje[0] + '</h1>';
-      for (var i = 1; i < mensaje.length; i++) {
-        document.getElementById("info").innerHTML += '<p>' + mensaje[i] + '</p>';
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
       }
-    }
+    </style>
 
-    function tamanoVentanaNavegador() {
-      // Adaptada de http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
-      var dimensiones = [];
+    <title>Actividad 5</title>
+  </head>
+  <body>
+    <div id="info"></div>
 
-      if (typeof (window.innerWidth) == 'number') {
-        // No es IE
-        dimensiones = [window.innerWidth, window.innerHeight];
-      } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-        // IE 6 en modo estándar (no quirks)
-        dimensiones = [document.documentElement.clientWidth, document.documentElement.clientHeight];
-      } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-        // IE en modo quirks
-        dimensiones = [document.body.clientWidth, document.body.clientHeight];
+    <script type="text/javascript">
+      function informacion(elEvento) {
+        var evento = elEvento || window.event;
+        var tamanoVentana = tamanoVentanaNavegador();
+
+        // Coordenadas del clic
+        var x = evento.clientX;
+        var y = evento.clientY;
+
+        // Determinar la zona de la pantalla
+        var zona = determinarZona(x, y, tamanoVentana);
+
+        // Mostrar la información al usuario
+        muestraInformacion(["Has hecho clic en la zona:", zona]);
       }
 
-      return dimensiones;
-    }
-
-    function determinarZona(x, y, tamanoVentana) {
-      var mitadAncho = tamanoVentana[0] / 2;
-      var mitadAlto = tamanoVentana[1] / 2;
-
-      if (x < mitadAncho) {
-        if (y < mitadAlto) {
-          return 'Izquierda arriba';
-        } else {
-          return 'Izquierda abajo';
-        }
-      } else {
-        if (y < mitadAlto) {
-          return 'Derecha arriba';
-        } else {
-          return 'Derecha abajo';
+      function muestraInformacion(mensaje) {
+        document.getElementById("info").innerHTML =
+          "<h1 >" + mensaje[0] + "</h1>";
+        for (var i = 1; i < mensaje.length; i++) {
+          document.getElementById("info").innerHTML +=
+            "<p >" + mensaje[i] + "</p>";
         }
       }
-    }
 
-    document.onclick = informacion;
-  </script>
-</head>
-<body>
+      function tamanoVentanaNavegador() {
+        // Adaptada de http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
+        var dimensiones = [];
 
-<div id="info"></div>
+        if (typeof window.innerWidth == "number") {
+          // No es IE
+          dimensiones = [window.innerWidth, window.innerHeight];
+        } else if (
+          document.documentElement &&
+          (document.documentElement.clientWidth ||
+            document.documentElement.clientHeight)
+        ) {
+          // IE 6 en modo estándar (no quirks)
+          dimensiones = [
+            document.documentElement.clientWidth,
+            document.documentElement.clientHeight,
+          ];
+        } else if (
+          document.body &&
+          (document.body.clientWidth || document.body.clientHeight)
+        ) {
+          // IE en modo quirks
+          dimensiones = [document.body.clientWidth, document.body.clientHeight];
+        }
 
-</body>
+        return dimensiones;
+      }
+
+      function determinarZona(x, y, tamanoVentana) {
+        var mitadAncho = tamanoVentana[0] / 2;
+        var mitadAlto = tamanoVentana[1] / 2;
+
+        if (x < mitadAncho) {
+          if (y < mitadAlto) {
+            return "Izquierda arriba";
+          } else {
+            return "Izquierda abajo";
+          }
+        } else {
+          if (y < mitadAlto) {
+            return "Derecha arriba";
+          } else {
+            return "Derecha abajo";
+          }
+        }
+      }
+
+      document.onclick = informacion;
+    </script>
+  </body>
 </html>
