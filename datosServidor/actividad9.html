@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- Crea un carrusel de nombres de coches con dos flechitas para ir adelante y atrás y recorrer el array (es muy parecido a un ejercicio anterior). -->
+
+
+<h2>Fetch a JSON file with XMLHttpRequest</h2>
+<p>Content written as an JSON array will be converted into a JavaScript array.</p>
+<p id="demo"></p>
+
+<script>
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+      const myArr = JSON.parse(this.responseText);
+      document.getElementById("demo").innerHTML = myArr[0] + " " + myArr[1] + " " + myArr[2];
+    }
+    xmlhttp.open("GET", "json_demo_array.txt", true);
+    xmlhttp.send();
+    </script>
+    
+    </body>
+    </html>
