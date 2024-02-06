@@ -19,20 +19,16 @@
       }
 
       function myFunction(xhttp) {
-        // Dividir el contenido del fichero en líneas
         const lines = xhttp.responseText.split("\n");
 
-        // Crear colores diferentes para los encabezados
         const colors = ["red", "blue", "green", "orange", "purple"];
 
-        // Construir HTML con encabezados de diferentes colores
         let htmlContent = "";
         lines.forEach((line, index) => {
-          const color = colors[index % colors.length]; // Ciclar entre colores PENDIENTE ENTENDER
+          const color = colors[index % colors.length]; 
           htmlContent += `<h3 style="color: ${color};">${line}</h3>`;
         });
 
-        // Asignar el contenido al elemento con el id "demo"
         document.getElementById("demo").innerHTML = htmlContent;
       }
     </script>

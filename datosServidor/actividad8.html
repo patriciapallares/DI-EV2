@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <h2>Fetch a JSON file with XMLHttpRequest</h2>
+    <div id="demo"></div>
 
-<h2>Fetch a JSON file with XMLHttpRequest</h2>
-<p id="demo"></p>
+    <script>
+      const xmlhttp = new XMLHttpRequest();
+      xmlhttp.onload = function () {
+        const myObj = JSON.parse(this.responseText);
+        displayData(myObj);
+      };
+      xmlhttp.open("GET", "json_demo.txt");
+      xmlhttp.send();
 
-<script>
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
-  const myObj = JSON.parse(this.responseText);
-  document.getElementById("demo").innerHTML = myObj.name + " " + myObj.age;
-}
-xmlhttp.open("GET", "json_demo.txt");
-xmlhttp.send();
-</script>
+      function displayData(data) {
+        const demoDiv = document.getElementById("demo");
+        for (const key in data) {
+          const formattedKey = `<strong style="color: blue;">${key}:</strong>`;
+          const formattedValue = `<span style="color: blue;">${data[key]}</span>`;
+          const line = document.createElement("p");
+          line.innerHTML = `${formattedKey} ${formattedValue}`;
+          if (key === "name") {
+            line.addEventListener("click", () => showAlert(data[key]));
+            line.style.cursor = "pointer";
+            line.style.textDecoration = "underline";
+          }
+          demoDiv.appendChild(line);
+        }
+      }
 
-</body>
+      function showAlert(name) {
+        alert(`Has clicado en ${name}`);
+      }
+    </script>
+  </body>
 </html>

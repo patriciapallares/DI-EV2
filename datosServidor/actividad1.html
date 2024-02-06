@@ -10,7 +10,6 @@
       function loadDoc() {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function () {
-          // Modificar el color del texto a rojo
           document.getElementById("demo").style.color = "red";
           document.getElementById("demo").innerHTML = this.responseText;
         };

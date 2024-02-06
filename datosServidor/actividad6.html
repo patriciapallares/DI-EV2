@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="showCD"></div>
+    <br />
+    <input type="button" onclick="previous()" value="<<" />
+    <input type="button" onclick="next()" value=">>" />
+
+    <p>Click on a CD to display album information.</p>
+    <table id="demo"></table>
+
+    <script>
+      let i = 0;
+      let len;
+      let cd;
+
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        const xmlDoc = xhttp.responseXML;
+        cd = xmlDoc.getElementsByTagName("CD");
+        len = cd.length;
+        displayCD(i);
+        loadCDTable();
+      };
+      xhttp.open("GET", "cd_catalog.xml");
+      xhttp.send();
+
+      function displayCD(index) {
+        document.getElementById("showCD").innerHTML =
+          "Artist: " +
+          cd[index].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+          "<br>Title: " +
+          cd[index].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+          "<br>Year: " +
+          cd[index].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+      }
+
+      function next() {
+        if (i < len - 1) {
+          i++;
+          displayCD(i);
+        }
+      }
+
+      function previous() {
+        if (i > 0) {
+          i--;
+          displayCD(i);
+        }
+      }
+
+      function loadCDTable() {
+        let table = "<tr><th>Artist</th><th>Title</th></tr>";
+        for (let j = 0; j < cd.length; j++) {
+          table += "<tr onclick='displayCD(" + j + ")'><td>";
+          table +=
+            cd[j].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+          table += "</td><td>";
+          table +=
+            cd[j].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+          table += "</td></tr>";
+        }
+        document.getElementById("demo").innerHTML = table;
+      }
+    </script>
+  </body>
+</html>
