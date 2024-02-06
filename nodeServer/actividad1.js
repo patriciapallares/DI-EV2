@@ -1,4 +1,4 @@
-// Crea un programa en node.js que utilice un bucle para mostrar el mensaje "Node.js es muy chulo" diez veces por la consola.
+// 1. Crea un programa en node.js que utilice un bucle para mostrar el mensaje "Node.js es muy chulo" diez veces por la consola.
 
 const http = require('http');
 

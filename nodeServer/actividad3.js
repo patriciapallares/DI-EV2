@@ -1,4 +1,4 @@
-// Haz que muestre el mensaje "Soy un pesado que se ejecuta cada 2 segundos" cada dos segundos (pista: otra función JavaScript)..
+// 3. Haz que muestre el mensaje "Soy un pesado que se ejecuta cada 2 segundos" cada dos segundos (pista: otra función JavaScript)..
 
 const http = require("http");
 

@@ -1,4 +1,4 @@
-// Haz que el bucle anterior se ejecute tras un retardo de 2 segundos (pista: hay una función 
+// 2. Haz que el bucle anterior se ejecute tras un retardo de 2 segundos (pista: hay una función 
 // JavaScript para indicarle que ejecute una función al cabo de cierto tiempo).
 
 const http = require('http');
