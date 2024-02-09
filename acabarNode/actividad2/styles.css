@@ -1,0 +1,16 @@
+body {
+  margin: 50px;
+}
+table {
+  max-width: 70vw;
+}
+@media all and (min-width: 600px) {
+  table {
+    max-width: 45vw;
+  }
+}
+
+img {
+  width: 300px;
+  padding-right: 20px;
+}
