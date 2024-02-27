@@ -2,20 +2,25 @@
 <html>
   <body>
     <div id="demo">
-      <h2>The XMLHttpRequest Object</h2>
-      <button type="button" onclick="loadDoc()">Change Content</button>
+      <!-- <h2>The XMLHttpRequest Object</h2>
+      <button type="button" onclick="loadDoc()">Change Content</button> -->
     </div>
 
     <script>
-      function loadDoc() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-          document.getElementById("demo").style.color = "red";
-          document.getElementById("demo").innerHTML = this.responseText;
-        };
-        xhttp.open("GET", "ajax_info.txt");
-        xhttp.send();
-      }
+      // Supongamos que tienes una clave de API
+      const apiKey = "0b9ae65662514e61927fdd498013f3d6";
+
+      const searchTerm = "Spiderman";
+
+      fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Aquí puedes trabajar con los datos recibidos
+          console.log(data.results);
+        })
+        .catch((error) => {
+          console.error("Error al realizar la solicitud:", error);
+        });
     </script>
   </body>
 </html>

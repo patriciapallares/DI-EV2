@@ -1,23 +1,26 @@
 import React from "react";
 
-const MovieCard = ({ movie: { imdbID, Year, Poster, Title, Type } }) => {
+const MovieCard = ({ movie: { imdbID, released, background_image, name } }) => {
   return (
     <div className="movie" key={imdbID}>
       <div>
-        <p>{Year}</p>
+        <p>{released}</p>
       </div>
 
       <div>
         <img
           // "N/A" es como la api dice que no tiene poster
-          src={Poster !== "N/A" ? Poster : "https://via.placeholder.com/400"}
-          alt={Title}
+          src={
+            background_image !== "N/A"
+              ? background_image
+              : "https://via.placeholder.com/400"
+          }
+          alt={name}
         />
       </div>
 
       <div>
-        <span>{Type}</span>
-        <h3>{Title}</h3>
+        <h3>{name}</h3>
       </div>
     </div>
   );
