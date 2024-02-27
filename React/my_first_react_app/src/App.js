@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import MovieCard from "./MovieCard";
+import GameCard from "./GameCard";
 import SearchIcon from "./search.svg";
 import "./App.css";
 
@@ -11,17 +11,17 @@ const nueva =
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [games, setGames] = useState([]);
 
   // useEffect(() => {
-  //   searchMovies("Batman");
+  //   searchgames("Batman");
   // }, []);
   /*
-  const searchMovies = async (title) => {
+  const searchgames = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
 
-    setMovies(data.Search);
+    setGames(data.Search);
   };
   */
 
@@ -45,8 +45,14 @@ const App = () => {
     const data = await response.json();
 
     console.log(data.results);
-    setMovies(data.results);
+    setGames(data.results);
   };
+
+  // Para cargar cosas antes de la primera búsqueda
+
+  useEffect(() => {
+    buscarJuego("Classic");
+  }, []);
 
   return (
     <div className="app">
@@ -56,7 +62,7 @@ const App = () => {
         <input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for movies"
+          placeholder="Search for games"
         />
         <img
           src={SearchIcon}
@@ -65,16 +71,16 @@ const App = () => {
         />
       </div>
 
-      {movies?.length > 0 ? (
+      {games?.length > 0 ? (
         <div className="container">
-          {movies.map((movie) => (
+          {games.map((movie) => (
             // para evitar el error en la consola añadimos el key
-            <MovieCard movie={movie} key={movie.id} />
+            <GameCard movie={movie} key={movie.id} />
           ))}
         </div>
       ) : (
         <div className="empty">
-          <h2>No movies found</h2>
+          <h2>No games found</h2>
         </div>
       )}
     </div>

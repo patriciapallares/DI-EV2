@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieCard = ({ movie: { imdbID, released, background_image, name } }) => {
+const GameCard = ({ movie: { imdbID, released, background_image, name } }) => {
   return (
     <div className="movie" key={imdbID}>
       <div>
@@ -26,4 +26,4 @@ const MovieCard = ({ movie: { imdbID, released, background_image, name } }) => {
   );
 };
 
-export default MovieCard;
+export default GameCard;
